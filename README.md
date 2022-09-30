@@ -19,7 +19,7 @@ CREATE TABLE products (
   purchase_price INTEGER,
   wh_loc TEXT);
 
--- After the table was created, I input the data into each field on product table. 
+-- Input the data into each field on product table. 
 
 INSERT INTO products VALUES 
     (1,'Skirt',50,20,15,'Bandung'),
@@ -38,24 +38,16 @@ INSERT INTO products VALUES
     (14,'sport pant',30,35,32,'Jakarta'),
     (15,'uniform',20,25,23,'Jakarta');
     
--- what is the highest sell price on the store? I checked all the fields by sell price from the highest price    
+-- Display the database ordered by sell_price
 SELECT * FROM products ORDER BY sell_price DESC;
 
--- Is there any category item that is not belong to any warehouse? I rechecked whether there is product that has no location
-SELECT * FROM product WHERE location IS NULL;
+-- Display the sum of product quantity based on warehouse location
+SELECT wh_loc, SUM(pquantity) FROM products GROUP BY wh_loc ;
 
--- How many category item on each warehouse? I checked the fields of product name (pname) and their quantity (pquantity) and warehouse location (wh_loc)
-SELECT pname, pquantity, location FROM products ORDER BY wh_loc;
+-- Display the product name & its quantity in Jakarta warehouse
+SELECT pname,pquantity 
+FROM products 
+WHERE wh_loc='Jakarta';
 
--- How many item on each warehouse? I print the sum of product quantity based on warehouse location
-SELECT wh_loc, SUM(pquantity) FROM products GROUP BY LOCATION ;
-
--- What is the highest profit item? Print for profit on each product item as unit_profit and order by highest profit 1st
-SELECT *,(sell_price-purchase_price) AS unit_profit FROM products ORDER BY unit_profit DESC;
-
--- What is the highest profit category? I calculated for total profit ((sell price - purchase price)*quantity) on each category item order by highest total profit and limit to 5 rows
-SELECT pname,((sell_price-purchase_price)*pquantity) AS total_profit FROM products ORDER BY total_profit DESC limit 5;
-
--- What warehouse has the highest potential profit? I printed how much potential profit on each warehouse location if all the item sold
-SELECT location, ((sell_price-purchase_price)*pquantity) 'potential profit' FROM products
-GROUP BY LOCATION ;
+-- Display the top 5 of highest profit (sell_price - purchase_price)
+SELECT *,(sell_price-purchase_price) AS unit_profit FROM products ORDER BY unit_profit DESC LIMIT 5;
