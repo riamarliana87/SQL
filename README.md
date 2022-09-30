@@ -2,7 +2,7 @@
 
 ##Welcome to my SQL Portfolio! This code repository contain example of SQL I've written. Feel free to take a look and reach out via email if you have any question : ria.marliana87@gmail.com
 
--- I have an online shop. I sell 15 types of fashion which are located in 3 warehouses location (Jakarta, Bandung, Semarang). I want to calculate the potential profit in each warehouse if all items are sold.
+-- I have an online store. I sell 15 types of cloth which are located in 3 warehouses in Jakarta, Bandung, and Semarang. 
 -- The first thing I did was create a "store" database, then create table named "products". I defined the data type of each field.
 -- 1. pid (product id) : INTEGER PRIMARY KEY
 -- 2. pname (product name) : TEXT
