@@ -47,3 +47,22 @@ FROM BIT_DB.FebSales Feb
 LEFT JOIN BIT_DB.customers cust
 ON FEB.orderid=cust.order_id
 WHERE Feb.Quantity>2
+
+#8. Which locations in New York received at least 3 orders in January, and how many orders did they each receive?
+SELECT distinct location, count(orderID)
+FROM BIT_DB.JanSales
+WHERE location LIKE '%NY%'
+GROUP BY location
+HAVING count(orderID)>2;
+
+*9. What was the average quantity of products purchased per account in February?
+select AVG(quantity)
+FROM BIT_DB.FebSales Feb
+LEFT JOIN BIT_DB.customers cust
+ON FEB.orderid=cust.order_id;
+
+*10. Which product brought in the most revenue in January and how much revenue did it bring in total?
+SELECT product,SUM(quantity*price) AS revenue
+FROM JanSales
+GROUP BY product
+ORDER BY revenue DESC LIMIT 1;
