@@ -44,3 +44,13 @@ SELECT track_name, artist_name, popularity
 FROM BIT_DB.spotifydata
 ORDER BY popularity desc
 LIMIT 10
+
+#I want to calculate the average popularity on the Spotify data table with avg popularity 90 or above. I would like to use CTE to solve this problem.
+WITH popularity_avg_CTE AS(
+    SELECT artist_name, AVG(popularity) AS avg_pop
+    FROM Spotifydata
+    GROUP BY artist_name
+    HAVING avg_pop >=90
+    )
+SELECT artist_name,avg_pop,'Top Star' AS tag FROM popularity_avg_CTE
+ORDER BY avg_pop DESC;
